@@ -15,98 +15,87 @@
   $numemail = mysqli_num_rows($resultemail);
   $massage = "<h2>สวัสดีคุณ : <b>".$objResult['Firstname']."</b></h2><br><h1> รหัสผ่านของคุณคือ : ".$objResult['Password']."</h1>";
   if ($numemail > 0 ){
-    
-    require_once('./sentmailer/class.phpmailer.php');
-
-    $mail = new PHPMailer();
-    $mail->CharSet = "UTF-8";
-    
-    $mail->IsHTML(true);
-    $mail->IsSMTP();
-                    $mail->SMTPAuth = true; // enable SMTP authentication
-                    $mail->SMTPSecure = ""; // sets the prefix to the servier
-                    $mail->Host = "free.mboxhosting.com"; // sets GMAIL as the SMTP server
-                    $mail->Port = 25; // set the SMTP port for the GMAIL server
-                    $mail->Username = "learning2019@learning2019.ga"; // GMAIL username
-                    $mail->Password = 'nopparat23.'; // GMAIL password
-                    $mail->From = "learning2019@learning2019.ga"; // "name@yourdomain.com";
-                    //$mail->AddReplyTo = "support@thaicreate.com"; // Reply
-                    $mail->FromName = "learning2019";  // set from Name
-                    $mail->Subject = "รหัสผ่านสำหรับเว็บ learning2019"; 
-                    $mail->Body = $massage;
-                    
-                    $mail->AddAddress($email); // to Address
-
-                    if($mail->send()) {
-                     
-                      ?>
-
-                      <script type="text/javascript">
-                        var $ws = 'index.php';
-
-                        setTimeout(function () { 
-                          swal({
-                            title: "กรุณาตรวจสอบ รหัสผ่านที่ E-mail",
-
-                            type: "success",
-
-                            confirmButtonText: "ตกลง"
-                          },
-                          function(isConfirm){
-                            if (isConfirm) {
-                              window.location.href = $ws;
-                            }
-                          }); }, 50);
-
-                        </script>
-
-                      <?php }else{ ?>
-
-                        <script type="text/javascript">
-                          var $ws = 'index.php';
-
-                          setTimeout(function () { 
-                            swal({
-                              title: " Server มีปัญหา กรุณารอสักครู่แล้วลองใหม่",
-
-                              type: "error",
-
-                              confirmButtonText: "ตกลง"
-                            },
-                            function(isConfirm){
-                              if (isConfirm) {
-                                window.location.href = $ws;
-                              }
-                            }); }, 50);
 
 
-                          </script>
+     ini_set( 'display_errors', 1 );
+    error_reporting( E_ALL );
+    $from = "sharelea@sharelearningmedia.com";
+    $to = $email;
+    $subject = "รหัสผ่านสำหรับเว็บ sharelearningmedia.com";
+    $message = $massage;
+    $headers = "From:" . $from . "\r\n";
+    $headers .= "Content-Type: text/html; charset=utf-8\r\n";
+    $mailsend = mail($to,$subject,$message, $headers);
 
-                        <?php   }
+    if($mailsend){
+     ?>
 
-                      }else{ ?>
+     <script type="text/javascript">
+      var $ws = 'index.php';
 
-                       <script type="text/javascript">
-                        var $ws = 'index.php';
+      setTimeout(function () { 
+        swal({
+          title: "กรุณาตรวจสอบ รหัสผ่านที่ E-mail",
 
-                        setTimeout(function () { 
-                          swal({
-                            title: "ไม่พบที่อยู่ E-Mail กรุณาตรวจสอบ E-mail ที่ท่านใช้สมัคร",
+          type: "success",
 
-                            type: "error",
+          confirmButtonText: "ตกลง"
+        },
+        function(isConfirm){
+          if (isConfirm) {
+            window.location.href = $ws;
+          }
+        }); }, 50);
 
-                            confirmButtonText: "ลองใหม่อีกครั้ง"
-                          },
-                          function(isConfirm){
-                            if (isConfirm) {
-                              window.location.href = $ws;
-                            }
-                          }); }, 50);
+      </script>
+
+    <?php }else{ ?>
+
+      <script type="text/javascript">
+        var $ws = 'index.php';
+
+        setTimeout(function () { 
+          swal({
+            title: " Server มีปัญหา กรุณารอสักครู่แล้วลองใหม่",
+
+            type: "error",
+
+            confirmButtonText: "ตกลง"
+          },
+          function(isConfirm){
+            if (isConfirm) {
+              window.location.href = $ws;
+            }
+          }); }, 50);
 
 
-                        </script>
+        </script>
 
-                      <?php  }
-                    }
+      <?php   }
 
-                    ?>
+    }else{ ?>
+
+     <script type="text/javascript">
+      var $ws = 'index.php';
+
+      setTimeout(function () { 
+        swal({
+          title: "ไม่พบที่อยู่ E-Mail กรุณาตรวจสอบ E-mail ที่ท่านใช้สมัคร",
+
+          type: "error",
+
+          confirmButtonText: "ลองใหม่อีกครั้ง"
+        },
+        function(isConfirm){
+          if (isConfirm) {
+            window.location.href = $ws;
+          }
+        }); }, 50);
+
+
+      </script>
+
+    <?php  }
+  }
+
+  ?>

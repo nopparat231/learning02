@@ -38,7 +38,7 @@
 
      <div class="modal" id="resetpass">
       <div class="modal-dialog" role="document">
-        <form id="c_form-h" class="" action="resetpassword_db.php">
+        <form id="c_form-h" method="post" action="resetpassword_db.php">
         <div class="modal-content">
           <div class="modal-header">
             <h5 class="modal-title">ลืมรหัสผ่าน</h5> 
