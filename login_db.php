@@ -36,11 +36,11 @@ elseif($objResultcheck > 0)
 
     if($objResult["Userlevel"] == "A")
     {
-      Header("Location: ./admin/");
+      Header("Location: index.php");
     }
     elseif($objResult["Userlevel"]=="M")
     {
-      Header("Location: index1.php");
+      Header("Location: index.php");
 
    
   }
