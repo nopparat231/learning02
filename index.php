@@ -1,3 +1,11 @@
+
+<?php
+if(session_status() == PHP_SESSION_NONE){
+    //session has not started
+  session_start();
+}
+?>
+
 <!DOCTYPE html>
 <html>
 
@@ -21,29 +29,34 @@
 
         <?php
         $regis = isset($_GET['register']);
+        $learning = isset($_GET['learning']);
 
         if ($regis <> ''): ?>
          <div class="col-md-9 bg-light">
           <?php include 'register.php'; ?>
         </div>
-        <?php else: ?>
-
+        <?php elseif ($learning <> ''): ?>
           <div class="col-md-9 bg-light">
-            <div class="embed-responsive embed-responsive-16by9">
-              <video src="https://static.pingendo.com/video-placeholder.mp4" class="embed-responsive-item" controls="controls"> Your browser does not support HTML5 video. </video>
-            </div>
-            <br>
-            <font color="red">
-              <h4 class="">Heading 4 </h4>
-              <ol class="">
-                <li>One</li>
-                <li>Two</li>
-                <li>Three</li>
-                <li>Three</li>
-                <li>Three</li>
-                <li>Three</li>
-                <li>Three</li>
-              </ol>
+            <?php include 'index1.php'; ?>
+          </div>
+          <?php else: ?>
+
+            <div class="col-md-9 bg-light">
+              <div class="embed-responsive embed-responsive-16by9">
+                <video src="https://static.pingendo.com/video-placeholder.mp4" class="embed-responsive-item" controls="controls"> Your browser does not support HTML5 video. </video>
+              </div>
+              <br>
+              <font color="red">
+                <h4 class="">Heading 4 </h4>
+                <ol class="">
+                  <li>One</li>
+                  <li>Two</li>
+                  <li>Three</li>
+                  <li>Three</li>
+                  <li>Three</li>
+                  <li>Three</li>
+                  <li>Three</li>
+                </ol>
               </font>
             </div>
 
@@ -52,9 +65,23 @@
         </div>
       </div>
     </div>
-    <?php include 'footer.php'; ?>
+    <?php
+    if ($learning <> ''): ?>
+      <style>
+        .footer {
+         position: fixed;
+         bottom: 0;
+         width: 100%;
+         color: white;
+         text-align: center;
+       }
+     </style>
 
 
-  </body>
+   <?php endif ?>
 
-  </html>
+   <?php include 'footer.php'; ?>
+
+ </body>
+
+ </html>
