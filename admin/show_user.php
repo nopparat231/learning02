@@ -57,7 +57,7 @@ $totalRows_user = mysqli_num_rows($user);
 											<td><?php echo $i ?></td>
 											<td><?php echo $row_user['Username']; ?></td>
 											<td><?php echo $row_user['Firstname'] . "  " . $row_user['Lastname']; ?></td>
-											<td><?php echo $row_user['email'] . " <br /> " . $row_user['phone']; ?></td>
+											<td><?php echo " เบอร์โทร " . $row_user['phone'] . " <br /> อีเมล์ " . $row_user['email']; ?></td>
 											<td><?php echo $row_user['user_date']; ?></td>
 											<td><?php echo $row_user['Userlevel']; ?></td>
 
