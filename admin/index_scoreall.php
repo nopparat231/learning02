@@ -2,7 +2,7 @@
 
 
 
-$query_learning = "SELECT * FROM choice as c , user as u, user_learning as l where l.choice_id = c.choice_id and l.user_id = u.id order by l.user_learning_id" ;
+$query_learning = "SELECT * FROM choice as c , user as u, user_learning as l where l.choice_id = c.choice_id and l.user_id = u.id order by l.user_learning_id desc" ;
 $learning = mysqli_query($con,$query_learning) or die(mysqli_error());
 $row_learning = mysqli_fetch_assoc($learning);
 $totalRows_learning = mysqli_num_rows($learning);
@@ -77,4 +77,5 @@ $totalRows_learning = mysqli_num_rows($learning);
       <div class="col-md-12"></div>
     </div>
   </div>
+</div>
 </div>
