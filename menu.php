@@ -7,7 +7,9 @@
 
    			<a class="dropdown-toggle border-0 list-group-item d-flex justify-content-between align-items-center list-group-item-action" href="#" data-toggle="dropdown"> ข้อมูล </a>
 
-            <a href="score.php?user_id=<?php echo $_SESSION["UserID"]; ?>" class="border-0 list-group-item d-flex justify-content-between align-items-center list-group-item-action"> ข้อมูลคะแนน <i class="fa fa-list-ol text-muted fa-lg"></i></a>
+            <a href="score.php?user_id=<?php echo $_SESSION["UserID"]; ?>" class="border-0 list-group-item d-flex justify-content-between align-items-center list-group-item-action"> ข้อมูลคะแนน <i class="fa fa-check text-muted fa-lg"></i></a>
+
+            <a href="score_all.php" class="border-0 list-group-item d-flex justify-content-between align-items-center list-group-item-action"> ข้อมูลคะแนนทั้งหมด <i class="fa fa-list-ol text-muted fa-lg"></i></a>
 
             <ul class="dropdown-menu">
             <li>

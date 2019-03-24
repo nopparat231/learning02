@@ -47,7 +47,7 @@
 
     /* When the radio button is checked, add a blue background */
     .container input:checked ~ .checkmark {
-      background-color: #2196F3;
+      background-color: #52E678;
     }
 
     /* Create the indicator (the dot/circle - hidden when not checked) */
@@ -79,8 +79,8 @@
 <?php include 'conn.php'; ?>
 <?php 
 
-$choice_id = $_GET['choice_id'];
-$user_id = $_GET['user_id'];
+$choice_id = $_REQUEST['choice_id'];
+$user_id = $_REQUEST['user_id'];
 
 $sql="SELECT * From testing WHERE choice_id = $choice_id order by rand() limit 21";
 $db_query=mysqli_query($con,$sql) or die(mysqli_error());
@@ -104,11 +104,11 @@ $resultN=mysqli_fetch_array($db_queryN);
           <div class="col-md-12">
             <h1 class="text-center"><b>
 
-              <?php if (isset($_GET['bff'])){ ?>
+              <?php if (isset($_REQUEST['bff'])){ ?>
                 แบบทดสอบก่อนเรียน <?php echo $resultN['choice_name']; ?>
-              <?php }elseif(isset($_GET['aff'])){ ?>
+              <?php }elseif(isset($_REQUEST['aff'])){ ?>
                 แบบทดสอบหลังเรียน <?php echo $resultN['choice_name']; ?>
-              <?php }elseif (isset($_GET['af'])) { ?>
+              <?php }elseif (isset($_REQUEST['af'])) { ?>
                 เฉลยแบบทดสอบ <?php echo $resultN['choice_name']; ?>
               <?php } ?>
 
@@ -117,7 +117,7 @@ $resultN=mysqli_fetch_array($db_queryN);
         </div>
       </div>
     </div>
-    <form name="form1" method="get" action="">
+    <form name="form1" method="post" action="">
       <div class="py-3" style="">
         <div class="container">
           <div class="row">
@@ -126,7 +126,7 @@ $resultN=mysqli_fetch_array($db_queryN);
             <div class="col-md-10">
               <?php 
 
-              if (isset($_GET['af'])) {
+              if (isset($_REQUEST['af'])) {
                 include 'answer.php';
               }else{
 
@@ -189,9 +189,9 @@ $resultN=mysqli_fetch_array($db_queryN);
 <input type="hidden" name="user_id" value="<?php echo $user_id ?>">
 
 
-<?php if (isset($_GET['aff'])){ ?>
+<?php if (isset($_REQUEST['aff'])){ ?>
   <input type="hidden" name="af" value="af" />
-<?php }elseif(isset($_GET['bff'])){ ?>
+<?php }elseif(isset($_REQUEST['bff'])){ ?>
  <input type="hidden" name="bf" value="bf" />
 <?php } ?>
 
@@ -200,7 +200,7 @@ $resultN=mysqli_fetch_array($db_queryN);
   <div class="container">
     <div class="row">
       <div class="col-md-12 text-center">
-        <?php if (isset($_GET['af'])) { ?>
+        <?php if (isset($_REQUEST['af'])) { ?>
          <a href="score.php?user_id=<?php echo $user_id ?>" class="btn btn-secondary" type="button" >ดูคะแนนรวม</a>
        <?php }else{ ?>
         <button class="btn btn-secondary" type="submit" >ส่งคำตอบ</button>
@@ -211,9 +211,9 @@ $resultN=mysqli_fetch_array($db_queryN);
   </div>
 </div>
 </form>
-<?php if (isset($_GET['bf'])) {
+<?php if (isset($_REQUEST['bf'])) {
   bf();
-}elseif (isset($_GET['af'])) {
+}elseif (isset($_REQUEST['af'])) {
 
   af();
 } ?>
@@ -223,17 +223,17 @@ $resultN=mysqli_fetch_array($db_queryN);
 
 function bf(){
 
-  $choice_id = $_GET['choice_id'];
-  $user_id = $_GET['user_id'];
+  $choice_id = $_REQUEST['choice_id'];
+  $user_id = $_REQUEST['user_id'];
 
   $score =0;
 
 
-  $line = $_GET['line']+1;
+  $line = $_REQUEST['line']+1;
   for ($i=1; $i < $line; $i++) { 
 
 
-    if($_GET["c$i"] == $_GET["answer$i"])
+    if($_REQUEST["c$i"] == $_REQUEST["answer$i"])
     {
       $score=$score+1;
     }
@@ -281,17 +281,17 @@ function bf(){
 
   function af(){
 
-    $choice_id = $_GET['choice_id'];
-    $user_id = $_GET['user_id'];
-    $user_learning_af = $_GET['af'];
+    $choice_id = $_REQUEST['choice_id'];
+    $user_id = $_REQUEST['user_id'];
+    $user_learning_af = $_REQUEST['af'];
     $score =0;
 
 
-    $line = $_GET['line']+1;
+    $line = $_REQUEST['line']+1;
     for ($i=1; $i < $line; $i++) { 
 
 
-      if($_GET["c$i"] == $_GET["answer$i"])
+      if($_REQUEST["c$i"] == $_REQUEST["answer$i"])
       {
         $score=$score+1;
       }
