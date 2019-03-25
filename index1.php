@@ -4,7 +4,7 @@
 <?php 
 
 
-$query_choice = "SELECT * FROM choice ORDER BY choice_id";
+$query_choice = "SELECT * FROM choice WHERE choice_status <> 1 ORDER BY choice_id";
 $choice = mysqli_query($con,$query_choice) or die(mysqli_error());
 $row_choice = mysqli_fetch_assoc($choice);
 $totalRows_choice = mysqli_num_rows($choice);
@@ -21,6 +21,7 @@ $totalRows_testing = mysqli_num_rows($testing);
         <h1 class="mb-3 text-center">สื่อการเรียนรู้</h1>
         <hr>
         <ul class="list-group list-group-flush text-center">
+
           <?php if ($totalRows_choice > 0) {?>
             <?php do { ?>
 
@@ -33,6 +34,7 @@ $totalRows_testing = mysqli_num_rows($testing);
               $totalRows_query3 = mysqli_num_rows($db_query3);
 
               ?>
+             
 
               <?php if ($totalRows_query3 > 0){ ?>
 
@@ -68,6 +70,7 @@ $totalRows_testing = mysqli_num_rows($testing);
           <hr>
 
         <?php } while ($row_choice = mysqli_fetch_assoc($choice)); ?>
+
       <?php }
       mysqli_free_result($choice);
       ?>

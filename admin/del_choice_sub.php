@@ -4,9 +4,10 @@
 <?php
 
 $id = $_GET['id'];
+$st = $_GET['st'];
 
 
-$sql ="DELETE FROM testing WHERE id = $id";
+$sql ="UPDATE testing SET status = '$st' WHERE id = $id";
 
 $result = mysqli_query( $con,$sql) or die("Error in query : $sql" .mysqli_error());
 

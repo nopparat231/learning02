@@ -41,6 +41,7 @@ if(session_status() == PHP_SESSION_NONE){
           $su = isset($_REQUEST['su']);
           $eu = isset($_REQUEST['eu']);
           $sc = isset($_REQUEST['sc']);
+          $sco = isset($_REQUEST['sco']);
 
           if ($in <> '') {
             include 'index_scoreall.php';
@@ -58,7 +59,7 @@ if(session_status() == PHP_SESSION_NONE){
             include 'show_user.php';
           }elseif ($eu <> '') {
             include 'edit_user.php';
-          }elseif ($sc <> '') {
+          }elseif ($sc <> '' or $sco <> '') {
             include 'show_choice_all.php';
           }
 

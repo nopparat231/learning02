@@ -3,12 +3,13 @@
 
 <?php
 
-$choice_id = $_GET['choice_id'];
+$User_id = $_POST['User_id'];
 
-$st = $_GET['st'];
+$Userlevel = $_POST['Userlevel'];
+$user_date = $_POST['user_date'];
 
 
-$sql ="UPDATE choice SET choice_status = '$st' WHERE choice_id = $choice_id";
+$sql ="UPDATE user SET user_date = '$user_date' , Userlevel = '$Userlevel' WHERE ID = '$User_id'";
 
 
 $result = mysqli_query( $con,$sql) or die("Error in query : $sql" .mysqli_error());
@@ -19,13 +20,13 @@ mysqli_close($con);
 
 if($result){
 	echo "<script>";
-	echo "window.location ='index.php?sc'; ";
+	echo "window.location ='index.php?su'; ";
 	echo "</script>";
 } else {
 
 	echo "<script>";
 	echo "alert('ERROR!');";
-	echo "window.location ='index.php?sc'; ";
+	echo "window.location ='index.php?su'; ";
 	echo "</script>";
 }
 ?>

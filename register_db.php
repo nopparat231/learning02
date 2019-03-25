@@ -71,8 +71,10 @@ if ($numemail > 0 ){ ?>
 
 		<?php }else{
 	//เพิ่มเข้าไปในฐานข้อมูล
-			$sql = "INSERT INTO user(Firstname, Lastname, Username, Password, email ,phone , Userlevel , session_id ,  Status)
-			VALUES('$Firstname', '$Lastname', '$Username', '$Password', '$email' , '$phone' , '$Userlevel'  , '$session_id', '$Status')";
+      $d = date("Y-m-d");
+      $user_date = date('Y-m-d', strtotime('+2 years', strtotime($d)));
+			$sql = "INSERT INTO user(Firstname, Lastname, Username, Password, email ,phone , Userlevel , user_date , session_id ,  Status)
+			VALUES('$Firstname', '$Lastname', '$Username', '$Password', '$email' , '$phone' , '$Userlevel'  , '$user_date', '$session_id', '$Status')";
 
 			$result1 = mysqli_query($con, $sql) or die ("Error in query: $sql " . mysqli_error());
 			$ID = mysqli_insert_id($con) or die ("Error in query: $sql " . mysqli_error());

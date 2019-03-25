@@ -1,8 +1,9 @@
-<?php include '../conn.php'; ?>
+
 <meta charset="utf-8">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
 <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.1.3.css">
 
+<?php include '../conn.php'; ?>
 <?php 
 
 if (isset($_GET['choice_id'])) {
@@ -32,6 +33,10 @@ if (isset($_GET['choice_id'])) {
             </div>
             <div class="form-group"> 
               <input type="text" class="form-control" id="form29" required title="กรุณากรอก URL" placeholder="กรุณากรอก URL" name="video" value="<?php echo $row_editc['video'] ?>">
+            </div>
+
+              <div class="form-group"> 
+              <input type="text" class="form-control" id="form29" required placeholder="กรุณากรอกหมวดหมู่" name="choice_detail" value="<?php echo $row_editc['choice_detail'] ?> ">
             </div>
 
             <button type="submit" class="btn btn-primary">แก้ไข</button> 

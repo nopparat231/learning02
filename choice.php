@@ -82,11 +82,11 @@
 $choice_id = $_REQUEST['choice_id'];
 $user_id = $_REQUEST['user_id'];
 
-$sql="SELECT * From testing WHERE choice_id = $choice_id order by rand() limit 21";
+$sql="SELECT * From testing WHERE choice_id = '$choice_id' and status <> 1 order by rand() limit 21";
 $db_query=mysqli_query($con,$sql) or die(mysqli_error());
 $result=mysqli_fetch_array($db_query);
 
-$sqln="SELECT * From choice WHERE choice_id = $choice_id ";
+$sqln="SELECT * From choice WHERE choice_id = $choice_id and choice_status <> 1 ";
 $db_queryN=mysqli_query($con,$sqln) or die(mysqli_error());
 $resultN=mysqli_fetch_array($db_queryN);
 
