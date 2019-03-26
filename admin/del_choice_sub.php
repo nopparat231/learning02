@@ -2,7 +2,7 @@
 <?php include '../conn.php'; ?>
 
 <?php
-
+$choice_id = $_GET['choice_id'];
 $id = $_GET['id'];
 $st = $_GET['st'];
 
@@ -17,13 +17,13 @@ mysqli_close($con);
 
 if($result){
 	echo "<script>";
-	echo "window.location ='index.php?showchoice_s'; ";
+	echo "window.location ='index.php?showchoice_s&choice_id=$choice_id'; ";
 	echo "</script>";
 } else {
 
 	echo "<script>";
 	echo "alert('ERROR!');";
-	echo "window.location ='index.php?showchoice_s'; ";
+	echo "window.location ='index.php?showchoice_s&choice_id=$choice_id'; ";
 	echo "</script>";
 }
 ?>

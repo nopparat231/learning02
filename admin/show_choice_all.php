@@ -195,9 +195,17 @@ $totalRows_model = mysqli_num_rows($model);
                       </td>
                     <?php endif ?>
 
-                    <td><a href="index.php?sco" class="btn btn-outline-warning my-2 my-sm-0" ><i class="fa fa-youtube-play text-muted fa-mg"></i></a></td>
-                    <td><a href="index.php?showchoice_s" class="btn btn-outline-warning my-2 my-sm-0" ><i class="fa fa-file-text-o text-muted fa-mg"></i></a></td>
-                    <td><a href="index.php?in" class="btn btn-outline-warning my-2 my-sm-0" ><i class="fa fa-list-ol text-muted fa-mg"></i></a></td>
+                    <td>
+                      <a href="index.php?sco" class="btn btn-outline-warning my-2 my-sm-0" ><i class="fa fa-youtube-play text-muted fa-mg"></i></a>
+                    </td>
+
+                    <td>
+                      <a href="index.php?showchoice_s&choice_id=<?php echo $row_model['choice_id'];?>" class="btn btn-outline-warning my-2 my-sm-0" ><i class="fa fa-file-text-o text-muted fa-mg"></i></a>
+                    </td>
+
+                    <td>
+                      <a href="index.php?in" class="btn btn-outline-warning my-2 my-sm-0" ><i class="fa fa-list-ol text-muted fa-mg"></i></a>
+                    </td>
 
                   </tr>
 
