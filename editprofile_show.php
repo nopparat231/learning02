@@ -61,10 +61,8 @@ $num = mysqli_fetch_assoc($result);
                       <label class="col-2">วันหมดอายุ<br></label>
                       <div class="col-10">
                         <div class="input-group">
-                          
-                           <?php $da = date('d-m-Y',strtotime($num['user_date'])); ?>
+                          <?php $da = date('d-m-Y',strtotime($num['user_date'])); ?>
                           <?php echo $da; ?>
-                            
                             
                           </div>
                         </div>
@@ -77,7 +75,7 @@ $num = mysqli_fetch_assoc($result);
                           <div class="row">
                             <div class="col-md-12 text-center">
 
-                              <a class="btn btn-warning text-light mx-1" href="index.php?ep&user_id=<?php echo $_SESSION["UserID"]; ?>">แก้ไข</a>
+                              <a class="btn btn-warning text-light mx-1" href="editprofile.php?eu&user_id=<?php echo $_SESSION["UserID"]; ?>">แก้ไข</a>
                             </div>
                           </div>
                         </div>
