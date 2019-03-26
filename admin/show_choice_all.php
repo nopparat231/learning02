@@ -204,7 +204,7 @@ $totalRows_model = mysqli_num_rows($model);
                     </td>
 
                     <td>
-                      <a href="index.php?in" class="btn btn-outline-warning my-2 my-sm-0" ><i class="fa fa-list-ol text-muted fa-mg"></i></a>
+                      <a href="index.php?in&choice_id=<?php echo $row_model['choice_id']; ?>" class="btn btn-outline-warning my-2 my-sm-0" ><i class="fa fa-list-ol text-muted fa-mg"></i></a>
                     </td>
 
                   </tr>

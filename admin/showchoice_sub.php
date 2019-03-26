@@ -71,7 +71,7 @@ $totalRows_learning = mysqli_num_rows($learning);
           <td><?php echo $row_learning['answer']; ?></td>
 
           
-          <td><a href="edit_choice_sub.php?id=<?php echo $row_learning['id'];?>" class="btn btn-outline-warning my-2 my-sm-0" >แก้ไข</a></td>
+          <td><a href="edit_choice_sub.php?choice_id=<?php echo $choice_id; ?>&id=<?php echo $row_learning['id'];?>" class="btn btn-outline-warning my-2 my-sm-0" ><i class="fa fa-pencil-square-o text-muted fa-mg"></a></td>
           
           <?php if ($row_learning['status'] <> 1 ): ?>
             <td>
