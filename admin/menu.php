@@ -25,12 +25,14 @@
        </ul>
 
          <a href="../score.php?user_id=<?php echo $_SESSION["UserID"]; ?>" class="border-0 list-group-item d-flex justify-content-between align-items-center list-group-item-action"> ข้อมูลคะแนน <i class="fa fa-check text-muted fa-lg"></i></a>
-         
+
          <a href="index.php?in" class="border-0 list-group-item d-flex justify-content-between align-items-center list-group-item-action"> ข้อมูลคะแนนทั้งหมด <i class="fa fa-list-ol text-muted fa-lg"></i></a>
 
          
+      
+        <!--  <a href="index.php?send" class="border-0 list-group-item d-flex justify-content-between align-items-center list-group-item-action"> แจ้งเตือนสมาชิก <i class="fa fa-envelope text-muted fa-lg"></i></a>
 
-
+ -->
 
        <a href="logout.php" class="border-0 list-group-item d-flex justify-content-between align-items-center list-group-item-action"> ออกจากระบบ <i class="fa fa-sign-out text-muted fa-lg"></i></a>
      <?php endif ?>
