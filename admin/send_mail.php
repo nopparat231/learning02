@@ -23,14 +23,12 @@ $num = mysqli_fetch_assoc($result);
   <div class="container w-46">
     <div class="row">
       <div class="text-left col-md-12" style="">
-        <form class="" id="c_form-h" action="send_mail_db.php" method="get" >
+        <form class="" id="c_form-h" action="send_mail_db.php" method="post" >
           <div class="form-group row">
             <label class="col-3">ข้อความแจ้งเตือน</label>
             <div class="col-9">
 
-              <textarea rows="8" cols="80" required placeholder="กรุณากรอกข้อความ">
-                
-              </textarea>
+        <textarea rows="8" cols="80" required placeholder="กรุณากรอกข้อความ" name="massage"></textarea>
 
             </div>
             <label class="col-3">ส่งถึง</label>
@@ -39,7 +37,7 @@ $num = mysqli_fetch_assoc($result);
               <div class="container">
                 <div class="row">
                   <div class="col-md-12 text-center">
-                    <button name="m" type="btn" class="btn btn-primary text-light mx-1" >ผู้ใช้งาน</button>
+                    <button name="m" type="sub" class="btn btn-primary text-light mx-1" >ผู้ใช้งาน</button>
                     <button name="a" type="btn" class="btn btn-primary text-light mx-1" >แอดมิน</button>
                     <button name="am" type="btn" class="btn btn-primary text-light mx-1" >ผู้ใช้งาน & แอดมิน</button>
 
@@ -49,21 +47,9 @@ $num = mysqli_fetch_assoc($result);
               </div>
 
             </div>
-            <input type="hidden" name="id" value="<?php echo($num['ID'])?>">
+            
             <label class="col-3"></label>
-            <font color="red">
-
-              <h5>
-                <ol class="">
-                  <li>ระบบมีมาตราการเพื่อป้องกันข้อมูลส่วนบุคคล ขอให้ท่านได้ศึกษาและปฏิบัติตามขั้นตอนตามลำดับ</li>
-                  <li>ท่านต้องลงทะเบียนและใช้รหัสผ่านในการเข้าสู่ระบบ</li>
-                  <li>ควรเป็นผู้ทำรายการทุกขั้นตอนด้วยตัวเองและรักษารหัสผ่านเป็นความลับเพื่อป้องกันการแอบอ้างการเข้าสู่ระบบ</li>
-                  <li>ผู้ที่ยังไม่สมัครเป็นสมาชิกให้กดปุ่ม สมัครสมาชิก สำหรับผู้ที่สมัครเป็นสมาชิกให้กดปุ่ม เข้าสู่ระบบ เพื่อทำการ Login เข้าสู่ระบบ</li>
-
-                </ol>
-              </h5>
-
-            </font>
+     
 
 
           </form>
