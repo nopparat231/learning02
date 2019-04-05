@@ -73,8 +73,6 @@ if ($row_user['Userlevel'] == 'A' ){
   $a = 'selected';
 }elseif ($row_user['Userlevel'] == 'M') {
   $m = 'selected';
-}elseif ($row_user['Userlevel'] == 'E') {
-  $e = 'selected';
 }
 ?>
 <div class="form-group row">
@@ -84,7 +82,7 @@ if ($row_user['Userlevel'] == 'A' ){
    <select class="custom-select" name="Userlevel">
      <option <?php echo $a; ?> value="A">Admin</option>
      <option <?php echo $m; ?> value="M">User</option>
-     <option <?php echo $e; ?> value="E">Expired</option>
+     
 
    </select>
  </div>
