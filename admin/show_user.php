@@ -40,7 +40,7 @@ $totalRows_user = mysqli_num_rows($user);
 										<th scope="col">ชื่อ  - สกุล</th>
 										<th scope="col">ข้อมูลติดต่อ</th>
 										<th scope="col">วันหมดอายุ</th>
-										<th scope="col">ประเภท</th>
+										<th scope="col">สถานะ</th>
 
 										<th scope="col" width="5">แก้ไข</th>
 										<th scope="col" width="5">ยกเลิก</th>
