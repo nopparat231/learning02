@@ -93,8 +93,21 @@ $resultN=mysqli_fetch_array($db_queryN);
 
 ?>
 
-<body>
+<body onload="window.setTimeout(&#39;getSecs()&#39;,1)">
   <?php include 'navbar.php'; ?>
+
+  <?php 
+  if (!isset($_REQUEST['af'])) { ?>
+    <div style="position: fixed; width: 400px;">
+      <form method="post" name="formtime">
+        &nbsp;&nbsp;จับเวลาทำแบบทดสอบ : <input size="5" name="timespent" style="border: none;border-bottom: 2px solid red;" />
+        
+
+      </form>    
+
+    </div>
+  <?php }   ?>
+
   <?php //include 'banner.php'; ?>
   <div class="container">
 
@@ -111,7 +124,6 @@ $resultN=mysqli_fetch_array($db_queryN);
               <?php }elseif (isset($_REQUEST['af'])) { ?>
                 เฉลยแบบทดสอบ <?php echo $resultN['choice_name']; ?>
               <?php } ?>
-
             </b></h1>
           </div>
         </div>
@@ -143,6 +155,7 @@ $resultN=mysqli_fetch_array($db_queryN);
                 $arran = "answer[$re]";
 
                 ?>
+                   <input size="5" name="timespent" type="hidden" />
                 <input name="id" type="hidden" value="<?php echo $result['id']; ?>">
                 <input name="id<?php echo $i;?>" type="hidden" value="<?php echo $result['id']; ?>">
                 <h3><?php echo $i." ).   ".$result["question"];?></h3>
@@ -151,7 +164,7 @@ $resultN=mysqli_fetch_array($db_queryN);
                 <ol>
 
                   <label class="container"><h5><?php echo $result["c1"];?>
-                  <input type="radio" name="c<?php echo $i;?>" value="1" required >
+                  <input type="radio" name="c<?php echo $i;?>" value="1" required checked >
                   <span class="checkmark"></span></h5>
                 </label>
 
@@ -169,7 +182,7 @@ $resultN=mysqli_fetch_array($db_queryN);
             <input type="radio" name="c<?php echo $i;?>" value="4">
             <span class="checkmark"></span></h5>
           </label>
-          
+
           <input name="answer<?php echo $i;?>" type="hidden" value="<?php echo $result['answer'];?>">
         </ol>
 
@@ -203,7 +216,7 @@ $resultN=mysqli_fetch_array($db_queryN);
         <?php if (isset($_REQUEST['af'])) { ?>
          <a href="score.php?user_id=<?php echo $user_id ?>" class="btn btn-secondary" type="button" >ดูคะแนนรวม</a>
        <?php }else{ ?>
-        <button class="btn btn-secondary" type="submit" >ส่งคำตอบ</button>
+       
       <?php   } ?>
 
 
@@ -211,6 +224,7 @@ $resultN=mysqli_fetch_array($db_queryN);
   </div>
 </div>
 </form>
+
 <?php if (isset($_REQUEST['bf'])) {
   bf();
 }elseif (isset($_REQUEST['af'])) {
@@ -222,6 +236,8 @@ $resultN=mysqli_fetch_array($db_queryN);
 <?php
 
 function bf(){
+
+  $user_learning_time_af = 'ยังไม่ทำ';
 
   $choice_id = $_REQUEST['choice_id'];
   $user_id = $_REQUEST['user_id'];
@@ -241,7 +257,7 @@ function bf(){
   include 'conn.php';
 
   $user_learning_af = 'ยังไม่ทำ';
-  $sql1 = "INSERT INTO user_learning (choice_id, user_id , user_learning_bf , user_learning_af , user_learning_status) VALUES('$choice_id', '$user_id', '$score','$user_learning_af' , '0')";
+  $sql1 = "INSERT INTO user_learning (choice_id, user_id , user_learning_bf , user_learning_af , user_learning_status) VALUES('$choice_id', '$user_id', '$score','$user_learning_af' , '$user_learning_time_af' , '0' )";
 
 
   $result1 = mysqli_query($con, $sql1) or die ("Error in query: $sql1 " . mysqli_error());
@@ -282,6 +298,8 @@ function bf(){
 
   function af(){
 
+    $time = $_REQUEST['timespent'];
+
     $choice_id = $_REQUEST['choice_id'];
     $user_id = $_REQUEST['user_id'];
     $user_learning_af = $_REQUEST['af'];
@@ -299,7 +317,7 @@ function bf(){
     }
     include 'conn.php';
 
-    $sql2 = "UPDATE user_learning SET user_learning_af = $score WHERE user_id = $user_id AND choice_id = $choice_id ";
+    $sql2 = "UPDATE user_learning SET user_learning_af = $score , user_learning_time = '$time' WHERE user_id = $user_id AND choice_id = $choice_id ";
 
     $result2 = mysqli_query($con, $sql2) or die ("Error in query: $sql2 " . mysqli_error());
 
@@ -332,11 +350,39 @@ function bf(){
 
       </script>
     <?php } ?>
-
-
+<a type="button" value="submit" onclick="submitForms()" class="btn btn-secondary" >test</a>
+<!--  <button class="btn btn-secondary" onclick="submitForms()" >ส่งคำตอบ</button> -->
   </div>
- 
+
+  <script> 
+    startday = new Date();
+    clockStart = startday.getTime();
+    function initStopwatch() 
+    { 
+     var myTime = new Date(); 
+     var timeNow = myTime.getTime();  
+     var timeDiff = timeNow - clockStart; 
+     this.diffSecs = timeDiff/1000; 
+     return(this.diffSecs); 
+   } 
+   function getSecs() 
+   { 
+    var mySecs = initStopwatch(); 
+    var mySecs1 = ""+mySecs; 
+    mySecs1= mySecs1.substring(0,mySecs1.indexOf(".")) + " วินาที"; 
+    document.forms[0].timespent.value = mySecs1 
+    window.setTimeout('getSecs()',1000); 
+  }
+
+  submitForms = function(){
+    document.forms["form1"].submit();
+    document.forms["formtime"].submit();
+   
+    return true;
+  }
+</script>
+
 
 </body>
- <?php include 'footer.php'; ?>
+<?php include 'footer.php'; ?>
 </html>
