@@ -97,9 +97,10 @@ $resultN=mysqli_fetch_array($db_queryN);
   <?php include 'navbar.php'; ?>
 
   <?php 
+
   if (!isset($_REQUEST['af'])) { ?>
     <div style="position: fixed; width: 400px;">
-      <form method="post" name="formtime">
+      <form method="get" name="formtime" action="index.php">
         &nbsp;&nbsp;จับเวลาทำแบบทดสอบ : <input size="5" name="timespent" style="border: none;border-bottom: 2px solid red;" />
         
 
@@ -155,7 +156,7 @@ $resultN=mysqli_fetch_array($db_queryN);
                 $arran = "answer[$re]";
 
                 ?>
-                   <input size="5" name="timespent" type="hidden" />
+ 
                 <input name="id" type="hidden" value="<?php echo $result['id']; ?>">
                 <input name="id<?php echo $i;?>" type="hidden" value="<?php echo $result['id']; ?>">
                 <h3><?php echo $i." ).   ".$result["question"];?></h3>
@@ -216,13 +217,13 @@ $resultN=mysqli_fetch_array($db_queryN);
         <?php if (isset($_REQUEST['af'])) { ?>
          <a href="score.php?user_id=<?php echo $user_id ?>" class="btn btn-secondary" type="button" >ดูคะแนนรวม</a>
        <?php }else{ ?>
-       
-      <?php   } ?>
+ <button class="btn btn-secondary" >ส่งคำตอบ</button>
+       <?php   } ?>
 
 
-    </div>
-  </div>
-</div>
+     </div>
+   </div>
+ </div>
 </form>
 
 <?php if (isset($_REQUEST['bf'])) {
@@ -237,7 +238,7 @@ $resultN=mysqli_fetch_array($db_queryN);
 
 function bf(){
 
-  $user_learning_time_af = 'ยังไม่ทำ';
+  $user_learning_time_bf = 'ยังไม่ทำ';
 
   $choice_id = $_REQUEST['choice_id'];
   $user_id = $_REQUEST['user_id'];
@@ -257,7 +258,7 @@ function bf(){
   include 'conn.php';
 
   $user_learning_af = 'ยังไม่ทำ';
-  $sql1 = "INSERT INTO user_learning (choice_id, user_id , user_learning_bf , user_learning_af , user_learning_status) VALUES('$choice_id', '$user_id', '$score','$user_learning_af' , '$user_learning_time_af' , '0' )";
+  $sql1 = "INSERT INTO user_learning (choice_id, user_id , user_learning_bf , user_learning_af , user_learning_status) VALUES('$choice_id', '$user_id', '$score','$user_learning_af' , '$user_learning_time_bf' , '0' )";
 
 
   $result1 = mysqli_query($con, $sql1) or die ("Error in query: $sql1 " . mysqli_error());
@@ -317,7 +318,7 @@ function bf(){
     }
     include 'conn.php';
 
-    $sql2 = "UPDATE user_learning SET user_learning_af = $score , user_learning_time = '$time' WHERE user_id = $user_id AND choice_id = $choice_id ";
+    $sql2 = "UPDATE user_learning SET user_learning_af = $score , user_learning_time_af = '$time' WHERE user_id = $user_id AND choice_id = $choice_id ";
 
     $result2 = mysqli_query($con, $sql2) or die ("Error in query: $sql2 " . mysqli_error());
 
@@ -350,8 +351,8 @@ function bf(){
 
       </script>
     <?php } ?>
-<a type="button" value="submit" onclick="submitForms()" class="btn btn-secondary" >test</a>
-<!--  <button class="btn btn-secondary" onclick="submitForms()" >ส่งคำตอบ</button> -->
+  
+    <!--  <button class="btn btn-secondary" onclick="submitForms()" >ส่งคำตอบ</button> -->
   </div>
 
   <script> 
@@ -374,12 +375,13 @@ function bf(){
     window.setTimeout('getSecs()',1000); 
   }
 
-  submitForms = function(){
-    document.forms["form1"].submit();
-    document.forms["formtime"].submit();
-   
-    return true;
-  }
+  // submitForms = function(){
+  //   document.forms["formtime"].submit();
+  //   document.forms["form1"].submit();
+    
+
+  //   return true;
+  // }
 </script>
 
 
