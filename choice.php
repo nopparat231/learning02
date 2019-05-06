@@ -1,9 +1,11 @@
+
 <?php session_start();?>
 <html>
 
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js "></script>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" type="text/css">
   <link rel="stylesheet" href="https://static.pingendo.com/bootstrap/bootstrap-4.1.3.css">
 
@@ -98,18 +100,26 @@ $resultN=mysqli_fetch_array($db_queryN);
 
   <?php 
 
-  if (!isset($_REQUEST['af'])) { ?>
+  if (isset($_REQUEST['aff']) && !isset($_REQUEST['af'])) { ?>
     <div style="position: fixed; width: 400px;">
-      <form method="get" name="formtime" action="index.php">
-        &nbsp;&nbsp;จับเวลาทำแบบทดสอบ : <input size="5" name="timespent" style="border: none;border-bottom: 2px solid red;" />
-        
+      <form>
+        &nbsp;&nbsp;จับเวลาทำแบบทดสอบ : <input size="5" name="timespent" id="time_value" style="border: none;border-bottom: 2px solid red;" />
+        <input type="hidden" name="aff" id="ck" value="aff">
 
       </form>    
 
     </div>
-  <?php }   ?>
+  <?php } 
+  if (isset($_REQUEST['bff'])) { ?>
+    <div style="position: fixed; width: 400px;">
+      <form>
+        &nbsp;&nbsp;จับเวลาทำแบบทดสอบ : <input size="5" name="timespent" id="time_value" style="border: none;border-bottom: 2px solid red;" />
+        <input type="hidden" name="aff" id="ck" value="bff">
 
-  <?php //include 'banner.php'; ?>
+      </form>    
+
+    </div>
+  <?php } ?>
   <div class="container">
 
     <div class="py-2">
@@ -156,7 +166,7 @@ $resultN=mysqli_fetch_array($db_queryN);
                 $arran = "answer[$re]";
 
                 ?>
- 
+
                 <input name="id" type="hidden" value="<?php echo $result['id']; ?>">
                 <input name="id<?php echo $i;?>" type="hidden" value="<?php echo $result['id']; ?>">
                 <h3><?php echo $i." ).   ".$result["question"];?></h3>
@@ -198,9 +208,9 @@ $resultN=mysqli_fetch_array($db_queryN);
 </div>
 
 
-<input type="hidden" name="choice_id" value="<?php echo $choice_id ?>">
+<input type="hidden" name="choice_id" id="choice_id" value="<?php echo $choice_id ?>">
 
-<input type="hidden" name="user_id" value="<?php echo $user_id ?>">
+<input type="hidden" name="user_id" id="user_id" value="<?php echo $user_id ?>">
 
 
 <?php if (isset($_REQUEST['aff'])){ ?>
@@ -217,7 +227,8 @@ $resultN=mysqli_fetch_array($db_queryN);
         <?php if (isset($_REQUEST['af'])) { ?>
          <a href="score.php?user_id=<?php echo $user_id ?>" class="btn btn-secondary" type="button" >ดูคะแนนรวม</a>
        <?php }else{ ?>
- <button class="btn btn-secondary" >ส่งคำตอบ</button>
+         <button class="btn btn-secondary" id="btn1" >ส่งคำตอบ</button>
+
        <?php   } ?>
 
 
@@ -238,7 +249,7 @@ $resultN=mysqli_fetch_array($db_queryN);
 
 function bf(){
 
-  $user_learning_time_bf = 'ยังไม่ทำ';
+  //$user_learning_time_bf = 'ยังไม่ทำ';
 
   $choice_id = $_REQUEST['choice_id'];
   $user_id = $_REQUEST['user_id'];
@@ -256,17 +267,15 @@ function bf(){
     }
   }
   include 'conn.php';
-
-  $user_learning_af = 'ยังไม่ทำ';
-  $sql1 = "INSERT INTO user_learning (choice_id, user_id , user_learning_bf , user_learning_af , user_learning_status) VALUES('$choice_id', '$user_id', '$score','$user_learning_af' , '$user_learning_time_bf' , '0' )";
-
+  $sql1 = "UPDATE user_learning SET user_learning_bf = '$score' WHERE choice_id = '$choice_id'";
 
   $result1 = mysqli_query($con, $sql1) or die ("Error in query: $sql1 " . mysqli_error());
 
 //ปิดการเชื่อมต่อ database
   mysqli_close($con);
-//จาวาสคริปแสดงข้อความเมื่อบันทึกเสร็จและกระโดดกลับไปหน้าฟอร์ม
+//จาวาสคริปแสดงข้อความเมื่อบันทึกเสร็จและกระโดดกลับไปหน้าฟอร์ม  
   ?>
+  <input type="hidden" name="score" id="sc" value="<?php echo $score; ?>">
 
   <script src="https://code.jquery.com/jquery-2.1.3.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/1.1.3/sweetalert-dev.js"></script>
@@ -299,7 +308,7 @@ function bf(){
 
   function af(){
 
-    $time = $_REQUEST['timespent'];
+    //$time = $_REQUEST['timespent'];
 
     $choice_id = $_REQUEST['choice_id'];
     $user_id = $_REQUEST['user_id'];
@@ -318,7 +327,7 @@ function bf(){
     }
     include 'conn.php';
 
-    $sql2 = "UPDATE user_learning SET user_learning_af = $score , user_learning_time_af = '$time' WHERE user_id = $user_id AND choice_id = $choice_id ";
+    $sql2 = "UPDATE user_learning SET user_learning_af = $score WHERE user_id = $user_id AND choice_id = $choice_id ";
 
     $result2 = mysqli_query($con, $sql2) or die ("Error in query: $sql2 " . mysqli_error());
 
@@ -351,7 +360,7 @@ function bf(){
 
       </script>
     <?php } ?>
-  
+
     <!--  <button class="btn btn-secondary" onclick="submitForms()" >ส่งคำตอบ</button> -->
   </div>
 
@@ -375,15 +384,23 @@ function bf(){
     window.setTimeout('getSecs()',1000); 
   }
 
-  // submitForms = function(){
-  //   document.forms["formtime"].submit();
-  //   document.forms["form1"].submit();
-    
-
-  //   return true;
-  // }
 </script>
 
+<script type="text/javascript">
+
+ $(document).ready(function(){
+
+  $("#btn1").click(function(){
+
+    $.post("savetime.php", { 
+      data1: $("#time_value").val(), 
+      data2: $("#user_id").val(),
+      data3: $("#ck").val(),
+      data4: $("#sc").val(),
+      data5: $("#choice_id").val()});
+  });
+});
+</script>
 
 </body>
 <?php include 'footer.php'; ?>
