@@ -175,7 +175,7 @@ $resultN=mysqli_fetch_array($db_queryN);
                 <ol>
 
                   <label class="container"><h5><?php echo $result["c1"];?>
-                  <input type="radio" name="c<?php echo $i;?>" value="1" required checked >
+                  <input type="radio" name="c<?php echo $i;?>" value="1" required>
                   <span class="checkmark"></span></h5>
                 </label>
 
